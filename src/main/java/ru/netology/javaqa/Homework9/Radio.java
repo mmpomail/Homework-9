@@ -2,26 +2,41 @@ package ru.netology.javaqa.Homework9;
 
 public class Radio {
 
-    private int currentChannel;
-    private int currentVolumeLevel;
+    private int numberOfChannels = 10;
+    private int minChannel = 0;
+    private int currentChannel = minChannel;
+    private int maxSoundLevel = 100;
+    private int minSoundLevel = 0;
+
+    private int currentSoundLevel = minSoundLevel;
+
+    public Radio(int numberOfChannels) {
+        this.numberOfChannels = numberOfChannels;
+    }
+
+    public Radio() {
+
+    }
+
+    public int getNumberOfChannels() {
+        return numberOfChannels;
+    }
 
     public int getCurrentChannel() {
-
         return currentChannel;
     }
 
-    public int getCurrentVolumeLevel() {
-
-        return currentVolumeLevel;
+    public int getCurrentSoundLevel() {
+        return currentSoundLevel;
     }
 
     public void setRadioChannel(int newRadioChannel) {
 
-        if (newRadioChannel < 0) {
+        if (newRadioChannel < minChannel) {
             return;
         }
 
-        if (newRadioChannel > 9) {
+        if (newRadioChannel > (numberOfChannels - 1)) {
             return;
         }
         currentChannel = newRadioChannel;
@@ -30,7 +45,7 @@ public class Radio {
 
     public void nextChannel() {
 
-        if (currentChannel == 9) {
+        if (currentChannel == (numberOfChannels - 1)) {
             currentChannel = 0;
         } else {
             currentChannel += 1;
@@ -39,8 +54,8 @@ public class Radio {
     }
 
     public void prevChannel() {
-        if (currentChannel == 0) {
-            currentChannel = 9;
+        if (currentChannel == minChannel) {
+            currentChannel = (numberOfChannels - 1);
         } else {
             currentChannel -= 1;
         }
@@ -49,33 +64,33 @@ public class Radio {
 
     public void setCurrentVolumeLevel(int newVolumeLevel) {
 
-        if (newVolumeLevel < 0) {
+        if (newVolumeLevel < minSoundLevel) {
             return;
         }
 
-        if (newVolumeLevel > 100) {
+        if (newVolumeLevel > maxSoundLevel) {
             return;
         }
-        currentVolumeLevel = newVolumeLevel;
+        currentSoundLevel = newVolumeLevel;
     }
 
     public void increaseVolume() {
-        if (currentVolumeLevel == 100) {
+        if (currentSoundLevel == maxSoundLevel) {
             return;
         } else {
-            currentVolumeLevel += 1;
+            currentSoundLevel += 1;
         }
     }
 
     public void decreaseVolume() {
-        if (currentVolumeLevel == 0) {
+        if (currentSoundLevel == minSoundLevel) {
             return;
         } else {
-            currentVolumeLevel -= 1;
+            currentSoundLevel -= 1;
 
         }
     }
 
-}
 
+}
 
